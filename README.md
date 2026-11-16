@@ -34,7 +34,21 @@ leverb-lab/
 
 数据先按任务名划分，再把每条示范切成训练窗口。数据加载器按帧索引取出双视角图像，配上语言指令、当前姿态和未来轨迹。
 
-代码仓库不包含视频、处理结果和模型权重。训练时，原始示范从 `data/raw/LeVERB-Bench-Dataset/` 读取，处理结果从 `data/processed/vl_batch/` 读取，训练记录和权重默认写入 `runs/`。
+## 数据获取
+
+本项目使用的 570 条原始示范、训练与验证划分以及处理后的样本都保存在私有 Hugging Face 数据集仓库中。下载需要有该仓库访问权限的 Hugging Face 账号。[项目数据集](https://huggingface.co/datasets/junchi61/leverb-bench-570-processed)
+
+在项目的 Python 环境中，从代码仓库根目录运行以下命令。登录时使用有权读取该数据集的访问令牌。
+
+```bash
+hf auth login
+hf download junchi61/leverb-bench-570-processed \
+  --repo-type dataset --include 'data/**' --local-dir .
+```
+
+下载后，原始示范位于 `data/raw/LeVERB-Bench-Dataset/`，训练和验证样本位于 `data/processed/vl_batch/`，可以直接用现有训练脚本读取。训练记录和模型权重由训练脚本写入 `runs/`。
+
+也可以从官方仓库获取原始示范并自行处理。本项目选用的 570 条示范清单、划分和处理结果随私有数据集提供。[官方 LeVERB-Bench 数据集](https://huggingface.co/datasets/ember-lab-berkeley/LeVERB-Bench-Dataset)
 
 ## LeVERB-VL 模型模块
 
