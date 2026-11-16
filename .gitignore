@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+.venv/
+data/raw/
+data/processed/
+runs/
+
+/.vscode/
+/paper/
+*.bak
